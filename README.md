@@ -10,12 +10,20 @@ This lib propose a fluent API to handle bitfield and improve developer experienc
 [![Latest Stable Version](https://poser.pugx.org/maidmaid/flag/v/stable)](https://packagist.org/packages/maidmaid/flag)
 [![License](https://poser.pugx.org/maidmaid/flag/license)](https://packagist.org/packages/maidmaid/flag)
 
+## Installation
+
+Use [Composer](http://getcomposer.org/) to install Flag in your project:
+
+```shell
+composer require "maidmaid/flag"
+```
+
 ## Overview
 
-For example, here is how to play with ``Yaml`` flags:
+For example, here is how to play with [``Yaml`` flags](https://github.com/symfony/symfony/blob/8872833c5d6a46ea27a4483e650617361660d946/src/Symfony/Component/Yaml/Yaml.php#L23-L34):
 
 ```php
-use Symfony\Component\Flag\Flag;
+use Maidmaid\Flag\Flag;
 use Symfony\Component\Yaml\Yaml;
 
 $flag = Flag::create(Yaml::class)
@@ -36,10 +44,10 @@ foreach ($flag as $k => $v) {
 
 ## Prefixed Flags
 
-As in ``Caster::EXCLUDE_*`` case, it's possible to handle prefixed flags.
+As in [``Caster::EXCLUDE_*`` case](https://github.com/symfony/symfony/blob/8872833c5d6a46ea27a4483e650617361660d946/src/Symfony/Component/VarDumper/Caster/Caster.php#L25-L34), it's possible to handle prefixed flags.
 
 ```php
-use Symfony\Component\Flag\Flag;
+use Maidmaid\Flag\Flag;
 use Symfony\Component\VarDumper\Caster\Caster;
 
 $flag = Flag::create(Caster::class, 'EXCLUDE_')
@@ -50,7 +58,7 @@ $flag = Flag::create(Caster::class, 'EXCLUDE_')
 ```
 ## Hierarchical Flags
 
-As in ``Output::VERBOSITY_*`` case, flags are hierachical, like this:
+As in [``Output::VERBOSITY_*`` case](https://github.com/symfony/symfony/blob/8872833c5d6a46ea27a4483e650617361660d946/src/Symfony/Component/Console/Output/OutputInterface.php#L23-L27), flags are hierachical, like this:
 
 ```
 VERBOSITY_VERY_VERBOSE
@@ -62,7 +70,7 @@ This means that if ``VERBOSITY_VERY_VERBOSE`` is flagged, ``VERBOSITY_VERBOSE`` 
 
 ```php
 use Symfony\Component\Console\Output\Output;
-use Symfony\Component\Flag\Flag;
+use Maidmaid\Flag\Flag;
 
 $flag = Flag::create(Output::class, 'VERBOSITY_', $hierachical = true)
     ->add(Output::VERBOSITY_VERBOSE) // logs '[debug] bitfield changed Output::VERBOSITY_* [bin: 1000000] [dec: 64] [VERBOSITY_*: QUIET | NORMAL | VERBOSE]'
@@ -72,10 +80,10 @@ $flag = Flag::create(Output::class, 'VERBOSITY_', $hierachical = true)
 
 ## Global Flags
 
-It's possible to handle flags in global space, like with ``E_*`` errors flags.
+It's possible to handle flags in global space, like with [``E_*`` errors flags](http://php.net/manual/en/errorfunc.constants.php).
 
 ```php
-use Symfony\Component\Flag\Flag;
+use Maidmaid\Flag\Flag;
 
 $flag = Flag::create(null, 'E_')
     ->add(E_ALL)             // logs '[debug] bitfield changed E_* [bin: 111111111111111] [dec: 32767] [E_*: ERROR | RECOVERABLE_ERROR | WARNING | PARSE | NOTICE | STRICT | DEPRECATED | CORE_ERROR | CORE_WARNING | COMPILE_ERROR | COMPILE_WARNING | USER_ERROR | USER_WARNING | USER_NOTICE | USER_DEPRECATED | ALL]'
@@ -87,10 +95,10 @@ $flag = Flag::create(null, 'E_')
 
 ## No-int Flags
 
-As in ``Request::METHOD_*`` case, values flags are not integer but string. For example, ``METHOD_GET`` has ``GET`` string as value. This string values are internally binarized.
+As in [``Request::METHOD_*`` case](https://github.com/symfony/symfony/blob/8872833c5d6a46ea27a4483e650617361660d946/src/Symfony/Component/HttpFoundation/Request.php#L49-L58), values flags are not integer but string. For example, ``METHOD_GET`` has ``GET`` string as value. This string values are internally binarized.
 
 ```php
-use Symfony\Component\Flag\Flag;
+use Maidmaid\Flag\Flag;
 use Symfony\Component\HttpFoundation\Request;
 
 $flag = Flag::create(Request::class, 'METHOD_')
@@ -105,7 +113,7 @@ $flag = Flag::create(Request::class, 'METHOD_')
 It's also possible to handle no-constants flags.
 
 ```php
-use Symfony\Component\Flag\Flag;
+use Maidmaid\Flag\Flag;
 
 $flag = Flag::create()
     ->add('a') // logs '[debug] bitfield changed [bin: 1] [dec: 1] [flags: a]'
