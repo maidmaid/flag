@@ -2,9 +2,9 @@
 
 Binarized flags are not intuitive to understand, using concepts like
 [bitwise operators](http://php.net/manual/en/language.operators.bitwise.php),
-[bitmask](https://en.wikipedia.org/wiki/Mask_(computing)) or [Bit field](https://en.wikipedia.org/wiki/Bit_field).
+[bitmask](https://en.wikipedia.org/wiki/Mask_(computing)) or [bit field](https://en.wikipedia.org/wiki/Bit_field).
 Moreover, theses flags are not easy to debug; find flags that hide behind integer bitfield is very annoying.
-This lib propose a fluent API to handle bitfield and improve developer experience with tools for debugging them.
+This library propose a fluent API to handle bitfield and improve developer experience with tools for debugging them.
 
 [![Build Status](https://travis-ci.org/maidmaid/flag.svg?branch=master)](https://travis-ci.org/maidmaid/flag) 
 [![Latest Stable Version](https://poser.pugx.org/maidmaid/flag/v/stable)](https://packagist.org/packages/maidmaid/flag)
@@ -98,8 +98,8 @@ $flag = Flag::create(null, 'E_')
 As in [``Request::METHOD_*`` case](https://github.com/symfony/symfony/blob/8872833c5d6a46ea27a4483e650617361660d946/src/Symfony/Component/HttpFoundation/Request.php#L49-L58), values flags are not integer but string. For example, ``METHOD_GET`` has ``GET`` string as value. This string values are internally binarized.
 
 ```php
-use Maidmaid\Flag\Flag;
 use Symfony\Component\HttpFoundation\Request;
+use Maidmaid\Flag\Flag;
 
 $flag = Flag::create(Request::class, 'METHOD_')
     ->add(Request::METHOD_GET)  // logs '[debug] bitfield changed Request::METHOD_* [bin: 10] [dec: 2] [METHOD_*: GET]'
@@ -125,3 +125,16 @@ $flag = (new Flag())
     ->add(32) // logs '[debug] bitfield changed [bin: 101000] [dec: 40] [flags: 8 | 32]'
 ;
 ```
+
+## Debug
+
+If you add ``symfony/console`` suggested package, you can debug your flags with ``debug:flag`` command.
+Run ``php bin/flag --help`` for details.
+
+<p align="center">
+ <img src="doc/debug_command.png" width="600">
+</p>
+
+## License
+
+Flag is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
