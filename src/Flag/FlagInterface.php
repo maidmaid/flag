@@ -53,7 +53,7 @@ interface FlagInterface extends \IteratorAggregate
     /**
      * Adds a flag.
      *
-     * @param int $flag Bitfield to add
+     * @param int|string $flag Flag value to add
      *
      * @return $this
      */
