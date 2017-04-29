@@ -1,10 +1,16 @@
-<p align="center">**Flag** :golf:<p>
+# Flag
+
+<p align="center">:golf:<p>
 
 Binarized flags are not intuitive to understand, using concepts like
 [bitwise operators](http://php.net/manual/en/language.operators.bitwise.php),
 [bitmask](https://en.wikipedia.org/wiki/Mask_(computing)) or [Bit field](https://en.wikipedia.org/wiki/Bit_field).
 Moreover, theses flags are not easy to debug; find flags that hide behind integer bitfield is very annoying.
 This lib propose a fluent API to handle bitfield and improve developer experience with tools for debugging them.
+
+[![Build Status](https://travis-ci.org/maidmaid/flag.svg?branch=master)](https://travis-ci.org/maidmaid/flag) 
+[![Latest Stable Version](https://poser.pugx.org/maidmaid/flag/v/stable)](https://packagist.org/packages/maidmaid/flag)
+[![License](https://poser.pugx.org/maidmaid/flag/license)](https://packagist.org/packages/maidmaid/flag)
 
 ## Overview
 
