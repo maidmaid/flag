@@ -1,6 +1,4 @@
-# Flag
-
-<p align="center">:golf:<p>
+# Flag :golf:
 
 Binarized flags are not intuitive to understand, using concepts like
 [bitwise operators](http://php.net/manual/en/language.operators.bitwise.php),
