@@ -48,7 +48,7 @@ abstract class AbstractFlag implements FlagInterface
      * @param string|null|bool $from         Class from where the searching flags is made; define to null to
      *                                       search flags in global space; define to false for standalone use
      * @param string           $prefix       Prefix flags from the search flags is made
-     * @param bool             $hierarchical Defines hierarchical flags
+     * @param bool             $hierarchical Defines flags as hierarchical
      * @param int              $bitfield     Sets bitfield value
      *
      * @return AbstractFlag

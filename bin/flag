@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+use Maidmaid\Flag\Command\DebugCommand;
+use Symfony\Component\Console\Application;
+
+require file_exists(__DIR__.'/../vendor/autoload.php')
+    ? __DIR__.'/../vendor/autoload.php'
+    : __DIR__.'/../../../autoload.php'
+;
+
+$app = new Application();
+$app->add(new DebugCommand());
+$app->setDefaultCommand('debug:flag', true);
+$app->run();
