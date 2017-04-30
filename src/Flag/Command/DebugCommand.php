@@ -78,36 +78,43 @@ EOF
 
         $i = -1;
         foreach ($flags as $x => $flag) {
-            $this->legend($this->max - $x, ++$i, $flag, $flagged[$x]);
+            $this->legend($this->max - $x, ++$i, $flag, $from, $flagged[$x]);
         }
 
         $rows = $this->legends;
         array_unshift($rows, $bitfield);
 
-        $table = new Table($output);
-        $table->setColumnWidths(array_fill(0, count($headers), 2));
-        $table->setHeaders($headers);
-        $table->setRows($rows);
-        $table->setStyle('compact');
+        $table = (new Table($output))
+            ->setColumnWidths(array_fill(0, count($headers), 3))
+            ->setHeaders($headers)
+            ->setRows($rows)
+            ->setStyle('compact')
+        ;
+
+        $table->getStyle()
+            ->setVerticalBorderChar('')
+            ->setCrossingChar('')
+        ;
 
         $output->writeln('');
         $table->render();
     }
 
-    private function legend($x, $y, $name, $highlight = false)
+    private function legend($x, $y, $name, $from, $highlight = false)
     {
         $format = $highlight ? '<info>%s</info>' : '%s';
 
         while (!isset($this->legends[$y])) {
-            $this->legends[] = array_fill(0, $this->max + 1, '');
+            $this->legends[] = array_fill(0, $this->max + 2, '');
         }
 
-        $this->legends[$y][$x] = sprintf($format, '└─');
-        $this->legends[$y][$this->max + 1] = sprintf($format, $name);
+        $this->legends[$y][$x] = sprintf($format, '└──');
+        $this->legends[$y][$this->max + 1] = sprintf($format, ' '.$name);
+        $this->legends[$y][$this->max + 2] = sprintf($format, ' '.constant($from ? $from.'::'.$name : $name));
 
         // h
         for ($i = $x + 1; $i <= $this->max; ++$i) {
-            $this->legends[$y][$i] = sprintf($format, '──');
+            $this->legends[$y][$i] = sprintf($format, '───');
         }
 
         // v
